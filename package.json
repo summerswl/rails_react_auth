@@ -14,9 +14,6 @@
     "type": "git",
     "url": "git@github.com:bottega-code-school/js-builder.git"
   },
-  "babel": {
-    "plugins": ["react-hot-loader/babel"]
-  },
   "keywords": [
     "es6",
     "es7",

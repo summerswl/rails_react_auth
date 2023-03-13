@@ -9,23 +9,17 @@ const proxyRules = require('../proxy/rules');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
-
+console.log('__dirnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+console.log(__dirname);
 module.exports = webpackMerge(webpackCommon, {
-
   devtool: 'inline-source-map',
   mode: 'development',
-  output: {
-  
+  output: {  
     path: path.resolve(__dirname, '../static/dist'),
-
     filename: '[name].js',
-
     sourceMapFilename: '[name].map',
-
     chunkFilename: '[id]-chunk.js',
-
     publicPath: '/'
-
   },
 
   module: {
@@ -56,23 +50,19 @@ module.exports = webpackMerge(webpackCommon, {
     ]
 
   },
-
   plugins: [
     new DefinePlugin({
       'process.env': {
         NODE_ENV: "'development'"
       }
     }),
+    new HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, '../static/index.html'),
-      favicon: path.resolve(__dirname, '../static/favicon.ico'),
-      // template: resolve(__dirname, 'src/public', 'index.html'),
-      // filename: './index.html'
-    }),
-    // new HotModuleReplacementPlugin()
+      favicon: path.resolve(__dirname, '../static/favicon.ico')
+    })
   ],
-
   devServer: {
     host: env.devServer.host || 'localhost',
     port: env.devServer.port || 3000,
@@ -92,5 +82,4 @@ module.exports = webpackMerge(webpackCommon, {
     },
     proxy: proxyRules
   }
-
 });

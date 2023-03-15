@@ -1,8 +1,10 @@
+// import ReactDOM from "react-dom/client";
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Home from './Home';
 import Dashboard from './Dashboard';
+import Header from './Header'
 
 export default class app extends Component {
   constructor() {
@@ -12,12 +14,9 @@ export default class app extends Component {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {}
     };
-
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  checkLoginStatus() {
+  checkLoginStatus = () => {
     axios
       .get("http://localhost:3001/logged_in", { withCredentials: true})
       .then(response => {
@@ -41,14 +40,14 @@ export default class app extends Component {
     this.checkLoginStatus();
   }
 
-  handleLogout() {
+  handleLogout = () => {
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
       user: {}
     })
   }
 
-  handleLogin(data) {
+  handleLogin = (data) => {
     this.setState({
       loggedInStatus: "LOGGED_IN",
       user: data.user
@@ -58,12 +57,15 @@ export default class app extends Component {
   render() {
     return (
       <div className='app'>
-        <BrowserRouter>
+        <Header 
+          loggedInStatus={this.state.loggedInStatus}
+          handleLogout={this.handleLogout}
+        />
         <Switch>
           <Route 
             exact 
-            path={'/'} 
-            render={props => (
+            path={'/home'} 
+            component={props => (
               <Home 
                 {...props} 
                 handleLogin={this.handleLogin}
@@ -74,12 +76,11 @@ export default class app extends Component {
           <Route 
             exact 
             path={'/dashboard'} 
-            render={props => (
+            component={props => (
               <Dashboard {...props} loggedInStatus={this.state.loggedInStatus} />
-            )} 
-          />
-        </Switch>
-        </BrowserRouter>
+            )}
+          /> 
+        </Switch>         
       </div>
     );
   }

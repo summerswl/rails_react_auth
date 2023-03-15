@@ -10,12 +10,9 @@ export default class Login extends Component {
       password: '',
       loginErrors: ''
     }
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     const { email, password } = this.state;
     axios.post("http://localhost:3001/sessions", 
       {
@@ -27,10 +24,10 @@ export default class Login extends Component {
       { withCredentials: true }
     )
     .then(response => {
-      console.log("res from login", response);
-      // if (response.data.status === 'created') {
-      //   this.props.handleSuccessfulAuth(response.data)
-      // } 
+      // console.log("res from login", response);
+      if (response.data.status === 'created') {
+        this.props.handleSuccessfulAuth(response.data)
+      } 
     })
     .catch(error => {
       console.log("login error", error);
@@ -38,7 +35,7 @@ export default class Login extends Component {
     event.preventDefault();
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     })

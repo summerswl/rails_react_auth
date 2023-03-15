@@ -9,8 +9,6 @@ const proxyRules = require('../proxy/rules');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
-console.log('__dirnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-console.log(__dirname);
 module.exports = webpackMerge(webpackCommon, {
   devtool: 'inline-source-map',
   mode: 'development',

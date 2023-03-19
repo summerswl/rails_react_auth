@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import Login from './Login';
 import Home from './Home';
 import Dashboard from './Dashboard';
 import Header from './Header'
@@ -57,16 +58,23 @@ export default class app extends Component {
   render() {
     return (
       <div className='app'>
-        <Header 
-          loggedInStatus={this.state.loggedInStatus}
-          handleLogout={this.handleLogout}
-        />
+        <div>
+          <Header 
+            loggedInStatus={this.state.loggedInStatus}
+            handleLogout={this.handleLogout}
+          />
+        </div>
         <Switch>
           <Route 
             exact 
             path={'/home'} 
+            element={<Home/>}  
+          />
+          <Route 
+            exact 
+            path={'/login'} 
             component={props => (
-              <Home 
+              <Login 
                 {...props} 
                 handleLogin={this.handleLogin}
                 handleLogout={this.handleLogout} 

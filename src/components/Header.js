@@ -20,6 +20,14 @@ handleLogout = () => {
   this.props.history.push("/home"); 
 }
 
+showLogout = () => {
+  if (this.props.loggedInStatus === "LOGGED_IN") {
+    return <button onClick={this.handleLogout}>Logout</button>;
+  } else {
+    ''
+  }
+}
+
   render() {
     return (
       <div>
@@ -28,7 +36,8 @@ handleLogout = () => {
           <h1>Status: {this.props.loggedInStatus}</h1>
           <button onClick={this.handleLogin}>Login</button>
           <button onClick={this.handleDashboard}>Dashboard</button>
-          <button onClick={this.handleLogout}>Logout</button>
+          {this.showLogout()}
+          {/* <button onClick={this.handleLogout}>Logout</button> */}
         </div>
       </div>
     );

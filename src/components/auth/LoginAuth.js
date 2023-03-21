@@ -24,7 +24,9 @@ export default class LoginAuth extends Component {
       { withCredentials: true }
     )
     .then(response => {
-      // console.log("res from login", response);
+      console.log("res from login", response);
+      console.log('response.data');
+      console.log(response.data);
       if (response.data.status === 'created') {
         this.props.handleSuccessfulAuth(response.data)
       } 

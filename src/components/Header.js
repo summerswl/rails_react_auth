@@ -11,13 +11,17 @@ handleLogin = () => {
   this.props.history.push("/login");
 }
 
+handleRegistration = () => {
+  this.props.history.push("/registration");
+}
+
 handleDashboard = () => {
   this.props.history.push("/dashboard");
 }
 
 handleLogout = () => {
   this.props.handleLogout();
-  this.props.history.push("/home"); 
+  this.props.history.push("/"); 
 }
 
 showLogout = () => {
@@ -35,7 +39,8 @@ showLogout = () => {
           <h1>Header</h1>
           <h1>Status: {this.props.loggedInStatus}</h1>
           <button onClick={this.handleLogin}>Login</button>
-          <button onClick={this.handleDashboard}>Dashboard</button>
+          <button onClick={this.handleRegistration}>Create Account</button>
+          {/* <button onClick={this.handleDashboard}>Dashboard</button> */}
           {this.showLogout()}
           {/* <button onClick={this.handleLogout}>Logout</button> */}
         </div>

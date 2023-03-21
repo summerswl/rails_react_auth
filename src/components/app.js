@@ -1,11 +1,11 @@
-// import ReactDOM from "react-dom/client";
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Routes, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import Login from './Login';
 import Home from './Home';
 import Dashboard from './Dashboard';
 import Header from './Header'
+import Registration from './Registration';
 
 export default class app extends Component {
   constructor() {
@@ -64,6 +64,9 @@ export default class app extends Component {
             handleLogout={this.handleLogout}
           />
         </div>
+        {/* <div>
+          <Home/>
+        </div> */}
         <Switch>
           <Route 
             exact 
@@ -75,6 +78,17 @@ export default class app extends Component {
             path={'/login'} 
             component={props => (
               <Login 
+                {...props} 
+                handleLogin={this.handleLogin}
+                handleLogout={this.handleLogout} 
+                loggedInStatus={this.state.loggedInStatus} />
+            )} 
+          />
+          <Route 
+            exact 
+            path={'/registration'} 
+            component={props => (
+              <Registration 
                 {...props} 
                 handleLogin={this.handleLogin}
                 handleLogout={this.handleLogout} 

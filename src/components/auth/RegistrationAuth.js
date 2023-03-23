@@ -34,6 +34,7 @@ export default class RegistrationAuth extends Component {
       })
       .catch(error => {
         console.log("registration error", error);
+        return <h1>error</h1>;
       });
       event.preventDefault();
   }

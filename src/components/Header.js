@@ -37,12 +37,10 @@ showLogout = () => {
       <div>
         <div className='header'>
           <h1>Header</h1>
-          <h1>Status: {this.props.loggedInStatus}</h1>
+          <h2>Status: {this.props.loggedInStatus}</h2>
           <button onClick={this.handleLogin}>Login</button>
           <button onClick={this.handleRegistration}>Create Account</button>
-          {/* <button onClick={this.handleDashboard}>Dashboard</button> */}
           {this.showLogout()}
-          {/* <button onClick={this.handleLogout}>Logout</button> */}
         </div>
       </div>
     );

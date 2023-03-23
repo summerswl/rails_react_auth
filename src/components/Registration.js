@@ -8,7 +8,6 @@ export default class Registration extends Component {
   }  
 
   handleSuccessfulAuth = (data) => {
-    //TODO update parent component
     this.props.handleLogin(data);
     //redirecting user(Using Route component from 'react-router-dom' in app.js)
     this.props.history.push("/dashboard");

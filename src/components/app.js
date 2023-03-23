@@ -13,7 +13,7 @@ export default class app extends Component {
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
+      showHome: false
     };
   }
 
@@ -44,14 +44,16 @@ export default class app extends Component {
   handleLogout = () => {
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
+      user: {},
+      showHome: true
     })
   }
 
   handleLogin = (data) => {
     this.setState({
       loggedInStatus: "LOGGED_IN",
-      user: data.user
+      user: data.user,
+      showHome: false
     })
   }
 
@@ -64,14 +66,18 @@ export default class app extends Component {
             handleLogout={this.handleLogout}
           />
         </div>
-        {/* <div>
-          <Home/>
-        </div> */}
+        {/* {this.showHome()} */}
         <Switch>
           <Route 
-            exact 
+            exact
             path={'/home'} 
-            element={<Home/>}  
+            component={props => (
+              <Home 
+                {...props} 
+                handleLogin={this.handleLogin}
+                handleLogout={this.handleLogout} 
+                loggedInStatus={this.state.loggedInStatus} />
+            )}   
           />
           <Route 
             exact 

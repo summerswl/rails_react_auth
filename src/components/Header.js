@@ -7,6 +7,10 @@ class Header extends Component {
     super(props);
   }  
 
+handleHome = () => {
+  this.props.history.push("/home");
+}
+
 handleLogin = () => {
   this.props.history.push("/login");
 }
@@ -24,11 +28,19 @@ handleLogout = () => {
   this.props.history.push("/"); 
 }
 
-showLogout = () => {
-  if (this.props.loggedInStatus === "LOGGED_IN") {
-    return <button onClick={this.handleLogout}>Logout</button>;
+showLoginLogout = () => {
+  if (this.props.loggedInStatus === "NOT_LOGGED_IN") {
+    return <button onClick={this.handleLogin}>Login</button>;
   } else {
-    ''
+    return <button onClick={this.handleLogout}>Logout</button>;
+  }
+}
+
+showRegistration = () => {
+  if (this.props.loggedInStatus === "NOT_LOGGED_IN") {
+    return <button onClick={this.handleRegistration}>Create Account</button>;
+  } else {
+    '';
   }
 }
 
@@ -36,11 +48,11 @@ showLogout = () => {
     return (
       <div>
         <div className='header'>
+          <button onClick={this.handleHome}>Home</button>
+          {this.showLoginLogout()}
+          {this.showRegistration()}
           <h1>Header</h1>
-          <h2>Status: {this.props.loggedInStatus}</h2>
-          <button onClick={this.handleLogin}>Login</button>
-          <button onClick={this.handleRegistration}>Create Account</button>
-          {this.showLogout()}
+          <h2>Status: {this.props.loggedInStatus}</h2>          
         </div>
       </div>
     );

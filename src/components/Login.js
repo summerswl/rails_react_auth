@@ -8,15 +8,14 @@ export default class Login extends Component {
   }  
 
   handleSuccessfulAuth = (data) => {
-    //TODO update parent component
     this.props.handleLogin(data);
-    //redirecting user(Using Route component from 'react-router-dom' in app.js)
+    // this.props.handleLogout(data); 
     this.props.history.push("/dashboard");
   }
 
-  handleLogout = () => {
-    this.props.handleLogout(); 
-  }
+  // handleLogout = () => {
+  //   this.props.handleLogout(); 
+  // }
 
   render() {
     return (

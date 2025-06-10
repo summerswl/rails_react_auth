@@ -50,7 +50,7 @@ module.exports = webpackMerge(webpackCommon, {
   plugins: [
     new DefinePlugin({
       'process.env': {
-        NODE_ENV: "'development'"
+        'process.env.NODE_ENV': "'development'"
       }
     }),
     new HotModuleReplacementPlugin(),
@@ -64,19 +64,10 @@ module.exports = webpackMerge(webpackCommon, {
     host: env.devServer.host || 'localhost',
     port: env.devServer.port || 3000,
     static: path.resolve(__dirname, '../static'),
-    // watchContentBase: true,
     compress: true,
-    hot: true,
     historyApiFallback: {
       disableDotRule: true
     },
-    // watchOptions: {
-    //   ignored: /node_modules/
-    // },
-    // overlay: {
-    //   warnings: true,
-    //   errors: true
-    // },
     proxy: proxyRules
   }
 });

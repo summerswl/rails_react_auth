@@ -8,7 +8,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end  
 
   allow do
-    origins "https://react-rails-auth.com"
+    origins "https://rails-react-auth.com"
     resource "*",
     headers: :any,
     methods: [:get, :post, :put, :patch, :delete, :options, :head],

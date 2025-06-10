@@ -8,9 +8,10 @@ export default class Registration extends Component {
   }  
 
   handleSuccessfulAuth = (data) => {
-    this.props.handleLogin(data);
-    //redirecting user(Using Route component from 'react-router-dom' in app.js)
-    this.props.history.push("/dashboard");
+    const { handleLogin, history } = this.props;
+    handleLogin(data);
+    // Redirecting user (Using Route component from 'react-router-dom' in app.js)
+    history.push("/dashboard");
   }
 
   handleLogout = () => {

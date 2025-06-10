@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+start application:
+rails s -p 3001 #run rails app on different port so react can run on 3000
+npm run start to sart react app

@@ -6,7 +6,6 @@ const webpackCommon = require("./common.config");
 // webpack plugins
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DefinePlugin = require("webpack/lib/DefinePlugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -55,9 +54,8 @@ module.exports = webpackMerge(webpackCommon, {
             {
               loader: "sass-loader",
               options: {
-                outputStyle: "expanded",
                 sourceMap: true,
-                sourceMapContents: true
+                sourceMap: true
               }
             }
           ]
@@ -96,23 +94,7 @@ module.exports = webpackMerge(webpackCommon, {
         NODE_ENV: '"production"'
       }
     }),
-    new ExtractTextPlugin("[name]-[chunkhash].min.css"),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          ie8: true,
-          warnings: false
-        },
-        mangle: {
-          ie8: true
-        },
-        output: {
-          comments: false,
-          ie8: true
-        }
-      },
-      sourceMap: true
-    }),
+    new ExtractTextPlugin("[name]-[chunkhash].min.css"),    
     new LoaderOptionsPlugin({
       options: {
         context: "/",

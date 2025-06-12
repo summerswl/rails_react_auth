@@ -1,16 +1,13 @@
 pipeline {
 
-    agent {
-        docker { image 'node:22.16.0-alpine3.22' }
-    }
+    agent any
 
     stages {
 
         stage("build") {
             
             steps {
-                sh 'node --eval "console.log(process.platform,process.env.CI)"'
-                label 'docker'
+                sh 'docker build'
             }
         }
 

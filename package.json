@@ -6,7 +6,7 @@
     "preinstall": "npm set audit false",
     "start": "webpack serve --config webpack/dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
-    "server": "rails s -p 3001",
+    "server": "rails s -p 3001 -b '0.0.0.0'",
     "client": "npm run start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "npm run build",

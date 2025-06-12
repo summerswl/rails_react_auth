@@ -14,7 +14,7 @@ services:
       - "3307:3306"
   app:
     build: .
-    command: rails s -p 3001 -b '0.0.0.0'
+    command: npm run dev
     volumes: 
       - ".:/rails_react_auth"
     ports: 

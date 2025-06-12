@@ -1,5 +1,5 @@
 {
-  "name": "react_rails_auth",
+  "name": "rails_react_auth",
   "version": "1.0.0",
   "description": "Basic skeleton codebase for React/Redux/Router applications.",
   "scripts": {

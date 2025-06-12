@@ -8,6 +8,7 @@ pipeline {
 
             steps {
                 echo 'building the application...'
+                sh 'npm run dev'
             }
         }
 
@@ -23,6 +24,17 @@ pipeline {
             steps {
                echo 'deploying the application...' 
             }
+        }
+    }
+    post {
+        always {
+            echo 'Reaching the end of pipeline...'
+        }
+        success {
+            echo 'Build, Test and Deployment completed successfully...'
+        }
+        failure {
+            echo 'The Build, Test or Deployment failed...'
         }
     }
 }

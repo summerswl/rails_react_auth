@@ -1,4 +1,4 @@
-version: '3.5'
+
 services:
   db:
     container_name: postgres
@@ -24,6 +24,6 @@ services:
     links:
       - db 
 
-# volumes:
-#   postgres-db:
-#     driver: local    
+volumes:
+  postgres-db:
+    driver: local    

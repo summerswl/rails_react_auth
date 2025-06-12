@@ -7,7 +7,7 @@ pipeline {
         stage("build") {
             
             steps {
-                sh 'docker build rails_react_auth'
+                sh 'docker-compose build '
             }
         }
 

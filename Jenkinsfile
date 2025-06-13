@@ -7,12 +7,14 @@ pipeline {
         stage("build") {
             
             steps {
+                echo 'Building the application...'
                 sh 'docker-compose build '
             }
         }
 
         stage('Checkout') {
             steps {
+                echo 'Testing the application...'
                 git 'https://github.com/summerswl/rails_react_auth'
             }
         }

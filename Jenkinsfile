@@ -30,13 +30,15 @@ pipeline {
 
         stage("test") {
 
-            script {
-                   if (isUnix()) {
-                        sh 'npm test'
-                    } else {
-                        bat 'npm test'
-                    }
+            steps {
+                script {
+                    if (isUnix()) {
+                            sh 'npm test'
+                        } else {
+                            bat 'npm test'
+                        }
                 }
+            }        
         }
 
         stage("deploy") {

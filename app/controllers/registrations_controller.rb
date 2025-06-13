@@ -1,3 +1,7 @@
+# Handles user registration by creating a new user with the provided email and password.
+# If the user is successfully created, sets the user ID in the session and returns a JSON response
+# with the status and user details. If creation fails, returns a JSON response with a status of 500.
+
 class RegistrationsController < ApplicationController
   def create
     user = User.create!(

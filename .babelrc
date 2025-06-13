@@ -6,6 +6,8 @@
   "plugins": [
     "react-hot-loader/babel",
     "babel-plugin-transform-class-properties",
+    "babel-plugin-syntax-class-properties",
+    "babel-plugin-transform-export-extensions",
     "@babel/plugin-proposal-object-rest-spread"
 
   ]

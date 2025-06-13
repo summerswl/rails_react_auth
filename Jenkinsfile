@@ -11,15 +11,10 @@ pipeline {
                 sh 'docker-compose build '
             }
         }
-
-        stage('Checkout') {
-            steps {
-                echo 'Testing the application...'
-                git 'https://github.com/summerswl/rails_react_auth'
-            }
-        }
+        
         stage('Install Dependencies') {
             steps {
+                echo 'Testing the application...'
                 script {
                     if (isUnix()) {
                         sh 'npm install'

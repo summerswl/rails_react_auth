@@ -42,12 +42,9 @@ pipeline {
 
             steps {
                echo 'deploying the application...' 
-               withCredentials([sshUserPrivateKey(credentialsId: 'rails_react_auth_ec2_key', keyFileVariable: 'PK')]) { 
-                  sh '''
-                  npm install
-                  npm run dev
-                  '''
-                }               
+               sshagent(['rails_react_auth_ec2_key']) { // Replace 'your-credential-id' with the actual credential ID
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-148-107-36.us-east-2.compute.amazonaws.com \'bash ~/deploy.sh\'' // Replace with your command
+               }          
             }
         }
     }

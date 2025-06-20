@@ -14,7 +14,6 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                echo 'Testing the application...'
                 script {
                     if (isUnix()) {
                         sh 'npm install'
@@ -28,6 +27,7 @@ pipeline {
         stage("Test") {
 
             steps {
+                echo 'Testing the application...'
                 script {
                     if (isUnix()) {
                             sh 'npm test'

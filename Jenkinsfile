@@ -42,8 +42,9 @@ pipeline {
 
             steps {
                echo 'deploying the application...' 
-               withCredentials([sshUserPrivateKey(credentialsId: 'rails_react_auth_ec2_key', keyFileVariable: 'PK')]) { // Replace 'my-ec2-key'
-                  sh 'ssh -i $PK ec2-user@ec2-3-148-107-36.us-east-2.compute.amazonaws.com' "npm install" "npm start" // Replace with your actual commands
+               withCredentials([sshUserPrivateKey(credentialsId: 'rails_react_auth_ec2_key', keyFileVariable: 'PK')]) { 
+                  sh 'ssh -i $PK ec2-user@ec2-3-148-107-36.us-east-2.compute.amazonaws.com' 
+                  sh 'npm run dev'
                 }               
             }
         }

@@ -42,21 +42,12 @@ pipeline {
 
             steps {
                echo 'deploying the application...' 
-               script {
-                def ec2_ip = 'ec2-3-148-107-36.us-east-2.compute.amazonaws.com'
-                def ec2_user = 'ec2-user'
-                def key_path = 'rails_react_auth/credentials.pem'
+               
 
-                sh """
-                ls rails_react_auth/credentials.pem
-                ssh -1 ${key_path} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
-                mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
-                git clone https://github.com/summerswl/rails_react_auth.git || (cd rails_react_auth)
-                cd rails_react_auth
-                npm install
-                npm start
-                EOF 
-                """
+                steps {
+                   withCredentials([sshUserPrivateKey(credentialsId: 'rails_react_auth_ec2_key', keyFileVariable: 'PK')]) { // Replace 'my-ec2-key'
+                       sh 'ssh -i $PK ec2-user@ec2-3-148-107-36.us-east-2.compute.amazonaws.com "npm install" "npm start"' // Replace with your actual commands
+                   }
                }
             }
         }

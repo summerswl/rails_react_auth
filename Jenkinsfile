@@ -48,7 +48,7 @@ pipeline {
                 key_path = '/credentials.pem'
 
                 sh """
-                ls /credentials-1.pem
+                ls /credentials.pem
                 ssh -1 ${key_path} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
                 mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
                 git clone https://github.com/summerswl/rails_react_auth.git || (cd rails_react_auth)

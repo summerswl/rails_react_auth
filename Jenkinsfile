@@ -43,7 +43,7 @@ pipeline {
             steps {
                echo 'deploying the application...' 
                script {
-                def ec2_ip = 'c2-18-225-3-48.us-east-2.compute.amazonaws.com'
+                def ec2_ip = '18.225.3.48'
                 def ec2_user = 'ubuntu'
                 def key_path = 'C:/key_pair/webserver_01.pem'
 

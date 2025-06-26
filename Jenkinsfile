@@ -41,10 +41,9 @@ pipeline {
         stage("Deploy to EC2") {
             steps {
                echo 'deploying the application...'
-               echo sshagent(credentials: ['503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb'])
                sshagent(credentials: ['503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb']) {
                 sh """
-                    ssh ubuntu@18.225.3.48 << EOF
+                    ssh ubuntu@ec2-18-225-3-48.us-east-2.compute.amazonaws.com << EOF
                     mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
                     git clone https://github.com/summerswl/rails_react_auth.git 
                     cd rails_react_auth

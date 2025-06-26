@@ -42,9 +42,21 @@ pipeline {
 
             steps {
                echo 'deploying the application...' 
-               sshagent(['rails_react_auth_ec2_key']) { // Replace 'your-credential-id' with the actual credential ID
-                sh 'ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-148-107-36.us-east-2.compute.amazonaws.com \'bash ~/deploy.sh\'' // Replace with your command
-               }          
+               script {
+                def ec2_ip = 'c2-18-225-3-48.us-east-2.compute.amazonaws.com'
+                def ec2_user = 'ubuntu'
+                def key_path = 'C:/key_pair/webserver_01.pem'
+
+                sh """
+                ls C:/key_pair/webserver_01.pem
+                ssh -1 ${key_path} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
+                mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
+                git clone https://github.com/summerswl/rails_react_auth.git 
+                cd rails_react_auth
+                npm install 
+                npm run dev
+                EOF
+                """         
             }
         }
     }

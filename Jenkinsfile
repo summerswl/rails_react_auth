@@ -56,7 +56,8 @@ pipeline {
                 npm install 
                 npm run dev
                 EOF
-                """         
+                """
+               }         
             }
         }
     }

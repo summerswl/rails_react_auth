@@ -41,23 +41,18 @@ pipeline {
         stage("Deploy to EC2") {
 
             steps {
-               echo 'deploying the application...' 
-               script {
-                def ec2_ip = '18.225.3.48'
-                def ec2_user = 'ubuntu'
-                def key_path = '/var/lib/jenkins/jenkins-a.pem'
-
+               echo 'deploying the application...'
+               sshagent(credentials: ['ubuntu']) {
                 sh """
-                ls /var/lib/jenkins
-                ssh -i ${key_path} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
-                mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
-                git clone https://github.com/summerswl/rails_react_auth.git 
-                cd rails_react_auth
-                npm install 
-                npm run dev
-                EOF
+                    ssh ubuntu@18.225.3.48 << EOF
+                    mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
+                    git clone https://github.com/summerswl/rails_react_auth.git 
+                    cd rails_react_auth
+                    npm install 
+                    npm run dev
+                    EOF
                 """ 
-               }        
+                }                   
             }
         }
     }

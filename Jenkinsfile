@@ -39,11 +39,10 @@ pipeline {
         }
 
         stage("Deploy to EC2") {
-
+            def agent = sshagent(credentials: ['503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb'])
             steps {
                echo 'deploying the application...'
-               def agent = sshagent(credentials: ['503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb'])
-               echo agent
+               echo "${agent}"
                sshagent(credentials: ['503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb']) {
                 sh """
                     ssh ubuntu@18.225.3.48 << EOF

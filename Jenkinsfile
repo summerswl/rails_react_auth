@@ -42,7 +42,7 @@ pipeline {
 
             steps {
                echo 'deploying the application...'
-               sshagent(credentials: ['ubuntu']) {
+               sshagent(credentials: ['503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb']) {
                 sh """
                     ssh ubuntu@18.225.3.48 << EOF
                     mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth

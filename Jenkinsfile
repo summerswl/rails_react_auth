@@ -49,15 +49,14 @@ pipeline {
 
                 sh """
                 ls C:/key_pair/webserver_01.pem
-                ssh -1 ${key_path} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
+                ssh -i ${key_path} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
                 mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
                 git clone https://github.com/summerswl/rails_react_auth.git 
                 cd rails_react_auth
                 npm install 
                 npm run dev
                 EOF
-                """
-               }         
+                """         
             }
         }
     }

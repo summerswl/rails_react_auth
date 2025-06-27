@@ -49,7 +49,7 @@ pipeline {
                 def ec2_user = 'ubuntu'
                 
                 sh """
-                ssh -1 ${CREDENTIALS} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
+                ssh -i ${CREDENTIALS} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
                 mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
                 git clone https://github.com/summerswl/rails_react_auth.git || (cd rails_react_auth)
                 cd rails_react_auth

@@ -44,10 +44,9 @@ pipeline {
         stage("Deploy to EC2") {
             steps {
                echo 'deploying the application...'
-
-               script {Add commentMore actions
-                def ec2_ip = 'ec2-3-148-107-36.us-east-2.compute.amazonaws.com'
-                def ec2_user = 'ec2-user'
+               script {
+                def ec2_ip = 'ec2-18-225-3-48.us-east-2.compute.amazonaws.com'
+                def ec2_user = 'ubuntu'
                 
                 sh """
                 ssh -1 ${CREDENTIALS} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF

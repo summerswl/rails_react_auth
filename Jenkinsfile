@@ -1,6 +1,9 @@
 pipeline {
 
     agent any
+    environment {
+        CREDENTIALS = credentials('503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb')
+    }
 
     stages {
 
@@ -42,32 +45,24 @@ pipeline {
             steps {
                echo 'deploying the application...'
 
-               withCredentials([sshUserPrivateKey(credentialsId: '503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb')]) {
-                 sh """
-                    ssh ubuntu@ec2-18-225-3-48.us-east-2.compute.amazonaws.com 
-                    mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
-                    git clone https://github.com/summerswl/rails_react_auth.git 
-                    cd rails_react_auth
-                    npm install 
-                    npm run dev
-                    """
+               script {Add commentMore actions
+                def ec2_ip = 'ec2-3-148-107-36.us-east-2.compute.amazonaws.com'
+                def ec2_user = 'ec2-user'
+                
+                sh """
+                ssh -1 ${CREDENTIALS} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
+                mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
+                git clone https://github.com/summerswl/rails_react_auth.git || (cd rails_react_auth)
+                cd rails_react_auth
+                npm install
+                npm start
+                EOF 
+                """
                }
             }
-
-            //    sshagent(['503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb']) {
-            //     sh """
-            //         ssh ubuntu@ec2-18-225-3-48.us-east-2.compute.amazonaws.com << EOF
-            //         mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
-            //         git clone https://github.com/summerswl/rails_react_auth.git 
-            //         cd rails_react_auth
-            //         npm install 
-            //         npm run dev
-            //         EOF
-            //     """ 
-            //     }                   
-            
         }
     }
+            
     post {
         always {
             echo 'Reaching the end of pipeline...'

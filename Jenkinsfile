@@ -41,12 +41,12 @@ pipeline {
         stage("Deploy to EC2") {
             steps {
                echo 'deploying the application...'
-               withCredentials([sshUserPrivateKey(credentialsId: "503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb", keyFileVariable: "KEY_FILE")]) {
+               withCredentials([sshUserPrivateKey(credentialsId: '503bafd9-dfdf-48bb-bffa-d7e54c2ce0fb', keyFileVariable: 'KEY_FILE')]) {
                     script {
-                        def ec2_ip = "ec2-18-225-3-48.us-east-2.compute.amazonaws.com"
-                        def ec2_user = "ubuntu"
+                        def ec2_ip = 'ec2-18-225-3-48.us-east-2.compute.amazonaws.com'
+                        def ec2_user = 'ubuntu'
                         
-                        sh """
+                        sh '
                         ssh -i ${KEY_FILE} -o StrictHostKeyChecking=no -t ${ec2_user}@${ec2_ip} << EOF
                         mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
                         git clone https://github.com/summerswl/rails_react_auth.git || (cd rails_react_auth)
@@ -54,7 +54,7 @@ pipeline {
                         npm install
                         npm start
                         EOF 
-                        """
+                        '
                     }
                }
             }

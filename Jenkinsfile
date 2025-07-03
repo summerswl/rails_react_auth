@@ -10,7 +10,7 @@ pipeline {
                 echo 'Building the application...'
                 script {
                     if (isUnix()) {
-                        sh 'docker compose build'
+                        sh 'docker-compose build'
                         sh 'npm install'
                         sh 'npm run client'
                     } else {

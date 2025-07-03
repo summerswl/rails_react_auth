@@ -10,7 +10,8 @@ pipeline {
                 echo 'Building the application...'
                     script {
                         if (isUnix()) {
-                            sh 'npm run dev'
+                            sh 'npm run server'
+                            sh 'npm run client'
                         } else {
                             bat 'npm run dev'
                         }

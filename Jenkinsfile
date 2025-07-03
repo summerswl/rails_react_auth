@@ -8,14 +8,15 @@ pipeline {
             
             steps {
                 echo 'Building the application...'
-                    script {
-                        if (isUnix()) {
-                            sh 'npm run server'
-                            sh 'npm run client'
-                        } else {
-                            bat 'npm run dev'
-                        }
+                script {
+                    if (isUnix()) {
+                        sh 'docker compose build'
+                        sh 'npm install'
+                        sh 'npm run client'
+                    } else {
+                        bat 'npm install'
                     }
+                }
             }
         }
         

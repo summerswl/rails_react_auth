@@ -48,7 +48,7 @@ pipeline {
                         
                         sh '''
                         ssh ${ec2_user}@${ec2_ip}
-                        mkdir -p /home/ec2-user/rails_react_auth && cd /home/ec2-user/rails_react_auth
+                        mkdir -p /home/ubuntu/rails_react_auth && cd /home/ubuntu/rails_react_auth
                         git clone https://github.com/summerswl/rails_react_auth.git || (cd rails_react_auth)
                         cd rails_react_auth
                         npm install

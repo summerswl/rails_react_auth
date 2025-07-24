@@ -47,13 +47,12 @@ pipeline {
                         def ec2_user = 'ubuntu'
                         
                         sh '''
-                        ssh ${ec2_user}@${ec2_ip}
-                        mkdir -p /home/ubuntu/rails_react_auth && cd /home/ubuntu/rails_react_auth
-                        git clone https://github.com/summerswl/rails_react_auth.git || (cd rails_react_auth)
-                        cd rails_react_auth
-                        npm install
-                        npm start
-                         
+                            ssh ${ec2_user}@${ec2_ip}
+                            mkdir -p /home/ubuntu/rails_react_auth && cd /home/ubuntu/rails_react_auth
+                            git clone https://github.com/summerswl/rails_react_auth.git || (cd rails_react_auth)
+                            cd rails_react_auth
+                            npm install
+                            npm run dev                         
                         '''
                     }
                }

@@ -68,6 +68,6 @@ module.exports = webpackMerge(webpackCommon, {
     historyApiFallback: {
       disableDotRule: true
     },
-    proxy: proxyRules
+    // proxy: proxyRules
   }
 });

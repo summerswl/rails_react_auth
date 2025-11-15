@@ -19,8 +19,8 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Login</h1>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <h1>Login: </h1>
         {/* <button onClick={() => this.handleLogout()}>Logout</button> */}
         {/* <Registration handleSuccessfulAuth={this.handleSuccessfulAuth}/> */}
         <LoginAuth handleSuccessfulAuth={this.handleSuccessfulAuth}/>

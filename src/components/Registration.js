@@ -20,8 +20,8 @@ export default class Registration extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Registration</h1>       
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <h1>Registration: </h1>       
         <RegistrationAuth handleSuccessfulAuth={this.handleSuccessfulAuth}/>
       </div>
     )

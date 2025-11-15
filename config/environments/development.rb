@@ -8,14 +8,21 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  config.log_level = :debug
+
+  config.reload_classes_only_on_change = false
+
+  config.autoloader = :zeitwerk
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports.
+    # Show full error reports.
   config.consider_all_requests_local = true
 
   # Enable server timing
   config.server_timing = true
+
+  config.cache_store = :memory_store, { size: 64.megabytes }
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

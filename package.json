@@ -70,15 +70,16 @@
     "babel-plugin-transform-class-properties": "^6.10.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
+    "http-proxy-middleware": "^3.0.5",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^30.0.0"
   },
   "overrides": {
-      "babel-template": {
-        "babel-traverse": "npm:@babel/traverse@latest"
-      },
-      "babel-helper-function-name": {
-        "babel-traverse": "npm:@babel/traverse@latest"
-      }
+    "babel-template": {
+      "babel-traverse": "npm:@babel/traverse@latest"
+    },
+    "babel-helper-function-name": {
+      "babel-traverse": "npm:@babel/traverse@latest"
     }
+  }
 }

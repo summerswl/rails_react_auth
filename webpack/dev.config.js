@@ -61,13 +61,18 @@ module.exports = webpackMerge(webpackCommon, {
     })
   ],
   devServer: {
-    host: env.devServer.host || 'localhost',
-    port: env.devServer.port || 3000,
-    static: path.resolve(__dirname, '../static'),
-    compress: true,
-    historyApiFallback: {
-      disableDotRule: true
-    },
-    // proxy: proxyRules
+  host: env.devServer.host || 'localhost',
+  port: env.devServer.port || 3000,
+  static: path.resolve(__dirname, '../static'),
+  compress: true,
+  historyApiFallback: true,
+  proxy: [
+      {
+        context: ['/weather'],
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        logLevel: 'debug'
+      }
+    ]
   }
 });

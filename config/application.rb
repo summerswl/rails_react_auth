@@ -10,6 +10,7 @@ module RailsReactAuth
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -17,6 +18,7 @@ module RailsReactAuth
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.autoload_paths << Rails.root.join('app/services')
+    config.autoload_paths << Rails.root.join('app/controllers/api/v1')
   end
 end

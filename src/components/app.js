@@ -12,7 +12,7 @@ export default class app extends Component {
     super();
 
     this.state = {
-      loggedInStatus: "NOT_LOGGED_IN",
+      loggedInStatus: "not logged in",
       showHome: false
     };
   }
@@ -21,14 +21,14 @@ export default class app extends Component {
     axios
       .get("http://localhost:3001/logged_in", { withCredentials: true})
       .then(response => {
-        if (response.data.logged_in && this.state.loggedInStatus === "NOT_LOGGED_IN") {
+        if (response.data.logged_in && this.state.loggedInStatus === "not logged in") {
           this.setState({
-            loggedInStatus: "LOGGED_IN",
+            loggedInStatus: "logged in",
             user: response.data.user
           })
-        } else if (!response.data.logged_in && this.state.loggedInStatus === "LOGGED_IN") {
+        } else if (!response.data.logged_in && this.state.loggedInStatus === "logged in") {
           this.setState({
-            loggedInStatus: "NOT_LOGGED_IN",
+            loggedInStatus: "not logged in",
             user: {}
           })
         }
@@ -43,7 +43,7 @@ export default class app extends Component {
 
   handleLogout = () => {
     this.setState({
-      loggedInStatus: "NOT_LOGGED_IN",
+      loggedInStatus: "not logged in",
       user: {},
       showHome: true
     })
@@ -51,7 +51,7 @@ export default class app extends Component {
 
   handleLogin = (data) => {
     this.setState({
-      loggedInStatus: "LOGGED_IN",
+      loggedInStatus: "logged in",
       user: data.user,
       showHome: false
     })
@@ -65,8 +65,11 @@ export default class app extends Component {
             loggedInStatus={this.state.loggedInStatus}
             handleLogout={this.handleLogout}
           />
+        <Home
+            loggedInStatus={this.state.loggedInStatus}
+            handleLogout={this.handleLogout}
+          />
         </div>
-        {/* {this.showHome()} */}
         <Switch>
           <Route 
             exact

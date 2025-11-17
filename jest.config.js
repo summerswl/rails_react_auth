@@ -3,5 +3,11 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
   coverageReporters: ['text', 'lcov'],
-  transformIgnorePatterns: [],
+  setupFilesAfterEnv: ['/mnt/c/build/rails_react_auth/setupTests.js'],
+  moduleNameMapper: {
+    '\\.(css|scss)$': 'identity-obj-proxy',
+  },
+  transform: {
+    '^.+\\.(js|jsx)$': 'babel-jest'
+  }
 };

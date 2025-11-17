@@ -1,6 +1,6 @@
 # README
 
-These are the current requirements to run this app in a local workspace. The app is located at https://github.com/summerswl under the name rails_react_auth. It has public viewing enabled and you should be able to fork off a new repo and run this in your local environment.
+These are the current requirements to run this app in a local workspace. The app repo is located at https://github.com/summerswl under the name rails_react_auth. It has public viewing enabled and you should be able to fork off a new repo and run this in your local environment.
 
 Setup required for app to load and run on local environment:
 
@@ -22,7 +22,15 @@ Setup required for app to load and run on local environment:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions ...
-        start application:
+        Start application:
         Execute 'npm run app' command from terminal of your choice(I use Ubuntu 2404.1.68.0) to start application. Open up a tab in your browser and app should be running at http://localhost:3000
 
-* How to run the test suite
+* How to run the test suite ...
+    Rspec tests: run 'bundle exec rspec' command for full test suite
+                 a single file can be run by adding the file structure to the command
+                 ex. - 'bundle exec rspec spec/controllers/weather_controller_spec.rb'
+    Jest tests: run 'npm test' command to run the full test suite
+                a single test can be run by executing the 'npm test' command combined
+                with the file name. 
+                ex. - 'npm test Home.test.js'
+

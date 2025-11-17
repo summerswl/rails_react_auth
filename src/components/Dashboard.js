@@ -33,7 +33,7 @@ export default function Dashboard() {
       <form onSubmit={fetchWeather}>
         <input
           type="text"
-          placeholder="Enter address (e.g., 1600 Pennsylvania Ave NW, Washington, DC)"
+          placeholder="Enter address (e.g., 1600 Pennsylvania Ave NW, Washington, DC 20500)"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           style={{ width: '100%', padding: '0.5rem', fontSize: '1rem' }}

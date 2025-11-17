@@ -1,34 +1,70 @@
-import * as React from 'react'
-import '@testing-library/jest-dom'
-import {render} from '@testing-library/react'
-import Registration from '../../src/components/Registration.js'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import Registration from '../../src/components/Registration.js';
 
-describe('code snippet', () => {
+// Mock the RegistrationAuth component
+jest.mock('../../src/components/auth/RegistrationAuth', () => {
+  return function MockRegistrationAuth({ handleSuccessfulAuth }) {
+    return (
+      <div data-testid="registration-auth">
+        <button onClick={() => handleSuccessfulAuth({ user: 'test' })}>
+          Mock Register
+        </button>
+      </div>
+    );
+  };
+});
 
-    // Renders a div container with h1 title "Registration"
-    it('should render div container with h1 title Registration when component mounts', () => {
-      const mockHandleSuccessfulAuth = jest.fn();
-      const wrapper = render(<Registration handleSuccessfulAuth={mockHandleSuccessfulAuth} />);
-  
-      const divContainer = wrapper.container.querySelector('div');
-      const h1Element = wrapper.getAllByRole('heading', { level: 1 });
-  
-      expect(divContainer).toBeInTheDocument();
-      // expect(h1Element).toBeInTheDocument();
-      // expect(h1Element).toHaveTextContent('Registration');
+describe('Registration Component', () => {
+  const mockProps = {
+    handleLogin: jest.fn(),
+    handleLogout: jest.fn(),
+    history: {
+      push: jest.fn()
+    }
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('renders registration heading and RegistrationAuth component', () => {
+    render(<Registration {...mockProps} />);
+    
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Registration:');
+    expect(screen.getByTestId('registration-auth')).toBeInTheDocument();
+  });
+
+  it('applies correct styling to container div', () => {
+    const { container } = render(<Registration {...mockProps} />);
+    const divElement = container.firstChild;
+    
+    expect(divElement).toHaveStyle({
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
     });
+  });
 
-    // Handles undefined or null handleSuccessfulAuth prop gracefully
-    it('should render without errors when handleSuccessfulAuth prop is undefined', () => {
-      expect(() => {
-        render(<Registration handleSuccessfulAuth={undefined} />);
-      }).not.toThrow();
-  
-      const wrapper = render(<Registration handleSuccessfulAuth={null} />);
-      const h1Element = wrapper.getAllByRole('heading', { level: 1 });
-      const registrationAuthComponent = wrapper.container.querySelector('div');
-  
-      // expect(h1Element).toHaveTextContent('Registration');
-      expect(registrationAuthComponent).toBeInTheDocument();
-    });
+  it('calls handleLogin and redirects on successful auth', () => {
+    render(<Registration {...mockProps} />);
+    
+    const mockRegisterButton = screen.getByText('Mock Register');
+    mockRegisterButton.click();
+    
+    expect(mockProps.handleLogin).toHaveBeenCalledWith({ user: 'test' });
+    expect(mockProps.history.push).toHaveBeenCalledWith('/dashboard');
+  });
+
+  it('calls handleLogout when handleLogout method is invoked', () => {
+    // Use ref to access instance
+    const ref = React.createRef();
+    render(<Registration ref={ref} {...mockProps} />);
+    
+    // Call method directly
+    ref.current.handleLogout();
+    
+    expect(mockProps.handleLogout).toHaveBeenCalled();
+  });
 });

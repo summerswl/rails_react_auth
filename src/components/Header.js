@@ -8,7 +8,7 @@ export default class Header extends Component {
 
   render() {
     return (      
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>          
+      <div style={{ fontSize: '36px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>          
         <h1>Retrieve Forecast Data for a Given Address</h1>                          
       </div>
     );

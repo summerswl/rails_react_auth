@@ -13,7 +13,7 @@ class Home extends Component {
 // }
 
 handleLogin = () => {
-  this.props.history.push("/login");
+  this.props.history.push('/login');
 }
 
 handleRegistration = () => {
@@ -51,7 +51,7 @@ showRegistration = () => {
       <div>
         <div>
           <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            Welcome, please login to the application
+            Welcome, please login or create an account
           </h1>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             {/* <button onClick={this.handleHome}>Home</button> */}

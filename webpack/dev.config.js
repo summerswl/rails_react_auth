@@ -8,7 +8,7 @@ const proxyRules = require('../proxy/rules');
 // webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 module.exports = webpackMerge(webpackCommon, {
   devtool: 'inline-source-map',
   mode: 'development',
@@ -21,31 +21,28 @@ module.exports = webpackMerge(webpackCommon, {
   },
 
   module: {
-
     rules: [
+      // JS FIRST
+      {
+        test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: ['react-refresh/babel']
+          }
+        }
+      },
+      // SCSS SECOND
       {
         test: /\.s?css$/,
         use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-              sourceMap: true
-            }
-          }
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'sass-loader'
         ]
       }
     ]
-
   },
   plugins: [
     new DefinePlugin({
@@ -53,7 +50,7 @@ module.exports = webpackMerge(webpackCommon, {
         'process.env.NODE_ENV': "'development'"
       }
     }),
-    new HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, '../static/index.html'),
@@ -66,6 +63,11 @@ module.exports = webpackMerge(webpackCommon, {
   static: path.resolve(__dirname, '../static'),
   compress: true,
   historyApiFallback: true,
+  hot: true,
+  client: {
+      overlay: true,
+      progress: true,
+    },
   proxy: [
       {
         context: ['/weather'],
